@@ -23,7 +23,7 @@
   </body>
   <style>
     :root {
-      --PT-COLOR: #e4142c;
+      --PT-COLOR: #da251d;
     }
     * {
       margin: 0;
@@ -60,8 +60,8 @@
       display: none;
     }
     /* .img-wrapper {} */
-    img{
-        width: 75vmin;
+    img {
+      width: 75vmin;
     }
     .controls {
       position: fixed;
@@ -165,7 +165,7 @@
       let interval = setInterval(() => {
         let time = player.getCurrentTime();
         progressBar.style.setProperty("--value", (time / videoDuration) * 100);
-        done = time === videoDuration;
+        done = (time + 1) >= videoDuration;
         if (done) handleFinish(interval);
       }, 1000);
     }
