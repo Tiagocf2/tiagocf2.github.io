@@ -1,40 +1,229 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset='utf-8'>
+  <head>
+    <meta charset="utf-8" />
     <title>É LULA PORRA</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-</head>
-<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+  </head>
+  <body>
     <main>
-        <div class="img-wrapper">
-            <img src="assets/lula.png" />
+      <div class="img-wrapper">
+        <img src="assets/lula.png" />
+      </div>
+      <div class="background"></div>
+      <div id="player"></div>
+      <div class="controls">
+        <div class="progress">
+          <div class="progress-bar"></div>
         </div>
+        <button>🔊</button>
+      </div>
     </main>
-</body>
-<style>
-    *{
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+  </body>
+  <style>
+    :root {
+      --PT-COLOR: #e4142c;
     }
-    html, body{
-        width: 100vw;
-        height: 100vh;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    main{
-        width: 100%;
-        height: 100%;
-        display: grid;
-        place-items: center;
+    html,
+    body {
+      width: 100vw;
+      height: 100vh;
+    }
+    main {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+    .background {
+      position: absolute;
+      inset: 0;
+      background-image: url("assets/background.png");
+      background-repeat: round;
+      background-size: 20vmax;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      transform-style: preserve-3d;
+      scale: 1.25;
+      transition: transform 150ms ease;
+    }
+    #player {
+      display: none;
+    }
+    /* .img-wrapper {} */
+    img{
+        width: 75vmin;
+    }
+    .controls {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: transparent;
+      height: 1rem;
+      width: 100%;
+    }
+    .progress {
+      background-color: #6662;
+      width: 100%;
+      height: 100%;
+    }
+    .progress-bar {
+      --value: 0;
+      height: 100%;
+      width: calc(clamp(0, var(--value), 100) * 1%);
+      background-color: var(--PT-COLOR);
+      transition: width 1s linear;
+    }
+    .controls button {
+      background: none;
+      background-color: transparent;
+      border-width: 0;
+      border: none;
+      position: absolute;
+      right: 0.125em;
+      top: 0;
+      bottom: 0;
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    // 2. This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement("script");
+
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName("script")[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // 3. This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    let player;
+    let setup = false;
+    let videoDuration = 0;
+    let progressBar = document.querySelector(".progress-bar");
+    let btn = document.querySelector(".controls button");
+    let done = false;
+    let muted = false;
+
+    function triggerPlay() {
+      player.playVideo();
     }
 
-    .img-wrapper{
-        
+    function playerReady() {
+      player.setPlaybackQuality("small");
+      player.setVolume(50);
+      videoDuration = player.getDuration();
+      btn.addEventListener("click", toggleMute);
+      triggerPlay();
+
+      if (setup) return;
+
+      window.addEventListener("mousedown", triggerPlay, { once: true });
+      window.addEventListener("keydown", triggerPlay, { once: true });
+      window.addEventListener("scroll", triggerPlay, { once: true });
+      window.addEventListener("pointerdown", triggerPlay, { once: true });
     }
-</style>
-<script type="text/javascript">
-    
-</script>
+
+    function clearListeners(event) {
+      if (event.data == YT.PlayerState.PLAYING) {
+        setup = true;
+        window.removeEventListener("mousedown", triggerPlay);
+        window.removeEventListener("keydown", triggerPlay);
+        window.removeEventListener("scroll", triggerPlay);
+        window.removeEventListener("pointerdown", triggerPlay);
+        startProgress();
+      }
+    }
+
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player("player", {
+        height: "0",
+        width: "0",
+        videoId: "RTMiC5WturY",
+        playerVars: {
+          disablekb: 1,
+          rel: 0,
+          controls: 0,
+        },
+        events: {
+          onReady: playerReady,
+          onStateChange: clearListeners,
+        },
+      });
+    }
+
+    function startProgress() {
+      let interval = setInterval(() => {
+        let time = player.getCurrentTime();
+        progressBar.style.setProperty("--value", (time / videoDuration) * 100);
+        done = time === videoDuration;
+        if (done) handleFinish(interval);
+      }, 1000);
+    }
+
+    let icons = {
+      sound: "🔊",
+      muted: "🔈",
+      replay: "🔄",
+    };
+
+    function handleFinish(interval) {
+      clearInterval(interval);
+      btn.innerHTML = icons.replay;
+      btn.removeEventListener("click", toggleMute);
+      btn.addEventListener("click", restartVideo);
+    }
+
+    function restartVideo() {
+      player.seekTo(0);
+      triggerPlay();
+      btn.removeEventListener("click", restartVideo);
+      btn.addEventListener("click", toggleMute);
+      muted = false;
+      btn.innerHTML = icons.sound;
+      player.unMute();
+    }
+
+    function toggleMute() {
+      if (muted) {
+        player.unMute();
+        btn.innerHTML = icons.sound;
+      } else {
+        player.mute();
+        btn.innerHTML = icons.muted;
+      }
+      muted = !muted;
+    }
+
+    let img = document.querySelector("img");
+    let bg = document.querySelector(".background");
+    let anchor = img.getBoundingClientRect();
+    anchor = {
+      x: anchor.left + anchor.width / 2,
+      y: anchor.top + anchor.height / 2,
+    };
+
+    function handleMouse(e) {
+      const x = e.clientX;
+      const y = e.clientY;
+      const angle = (Math.atan2(anchor.y - y, anchor.x - x) * 180) / Math.PI;
+      img.style.filter = `hue-rotate(${angle}deg)`;
+      bg.style.setProperty(
+        "transform",
+        `translate(${(anchor.x - x) / 25}px, ${
+          (anchor.y - y) / 25
+        }px) translateZ(9rem)`
+      );
+    }
+    document.addEventListener("mousemove", handleMouse);
+  </script>
 </html>
