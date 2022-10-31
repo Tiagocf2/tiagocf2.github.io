@@ -54,7 +54,7 @@
       z-index: -1;
       transform-style: preserve-3d;
       scale: 1.25;
-      transition: transform 150ms ease;
+      transition: transform 200ms;
     }
     #player {
       display: none;
@@ -219,8 +219,8 @@
       img.style.filter = `hue-rotate(${angle}deg)`;
       bg.style.setProperty(
         "transform",
-        `translate(${(anchor.x - x) / 25}px, ${
-          (anchor.y - y) / 25
+        `translate(${(anchor.x - x) / 30}px, ${
+          (anchor.y - y) / 30
         }px) translateZ(9rem)`
       );
     }
