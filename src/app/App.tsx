@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme, getPreferredMode } from '@/styles/theme';
 import AppRouter from "./AppRouter"
 import type { AppContextProps } from "./AppTypes";
-import GlobalStyles from "@/styles/GlobalStyles";
+import "@/styles/scss/styles.scss";
 
 const defaultProps: AppContextProps = {
   mode: getPreferredMode(),
@@ -19,7 +19,7 @@ function App() {
       <AppContext.Provider value={defaultProps}>
         <ThemeProvider theme={lightTheme}>
           <AppRouter />
-          <GlobalStyles />
+          <footer>Footer 😎👍</footer>
         </ThemeProvider>
       </AppContext.Provider>
     </>

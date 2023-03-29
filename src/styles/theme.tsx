@@ -5,6 +5,7 @@ import { ThemeMode } from "@/app/AppTypes";
 
 export const appTheme: DefaultTheme = {
   borderRadius: '0px',
+  spacer: 1,
   typography: {},
 };
 

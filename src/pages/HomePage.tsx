@@ -1,7 +1,6 @@
-import styled from "styled-components";
 
 const HomePage = () => {
-  return <h1>Home page</h1>;
+  return <main style={{background: 'red'}}>Home page</main>;
 };
 
 export default HomePage;
