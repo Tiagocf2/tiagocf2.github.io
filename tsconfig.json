@@ -1,5 +1,5 @@
 {
-  "files": ["src/styles/styled.d.ts", "src/app/App.d.ts"],
+  "files": ["src/styles/styled.d.ts"],
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
