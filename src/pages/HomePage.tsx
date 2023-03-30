@@ -1,6 +1,7 @@
+import MainLayout from "@/layout/MainLayout";
 
 const HomePage = () => {
-  return <main style={{background: 'red'}}>Home page</main>;
+  return <div style={{background: 'red'}}>Home page</div>;
 };
 
-export default HomePage;
+export default MainLayout(HomePage, {footer: ()=><footer>Footer 😎👍</footer>});

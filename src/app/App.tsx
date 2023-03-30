@@ -19,7 +19,6 @@ function App() {
       <AppContext.Provider value={defaultProps}>
         <ThemeProvider theme={lightTheme}>
           <AppRouter />
-          <footer>Footer 😎👍</footer>
         </ThemeProvider>
       </AppContext.Provider>
     </>

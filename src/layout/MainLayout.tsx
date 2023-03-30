@@ -1,17 +1,15 @@
-import type { JSXLayoutAttributes } from './withLayout';
-
 const MainLayout =
-  ({ children, tag: ContentWrapper = 'main', ...props } : JSXLayoutAttributes):JSX.Element => {
-  return (
+  (Content: any, { tag: ContentWrapper = 'main', footer: Footer, ...props }: { tag?: any, props?: any, footer?: any } = {}) => {
+  return ()=>(
     <>
       <header className="header">
         {/* <AppNavbar /> */}
         <nav>NAVBAR FODA</nav>
       </header>
       <ContentWrapper className="page">
-        {children?.content && <children.content {...props} />}
+        {Content && <Content {...props} />}
       </ContentWrapper>
-      {children?.footer && <children.footer />}
+      {Footer && <Footer />}
     </>
   );
 };
