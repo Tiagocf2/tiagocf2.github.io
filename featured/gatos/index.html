@@ -32,12 +32,14 @@
       <div class="caption">
         <div class="about-container">
           <h2 class="caption-title">Jerry</h2>
-          <p>filhotinho meigo, inteligente e caçador.<br />já está desmamado e vermifugado</p>
+          <p>filhotinho meigo, inteligente e caçador.</p>
         </div>
+
         <div class="info-container">
           <p>~3 meses</p>
           <p>macho</p>
-          <p>amarelo</p>
+          <p>vermifugado</p>
+          <p>desmamado</p>
         </div>
       </div>
     </div>
@@ -56,7 +58,8 @@
         <div class="info-container">
           <p>~3 meses</p>
           <p>macho</p>
-          <p>preto</p>
+          <p>vermifugado</p>
+          <p>desmamado</p>
         </div>
       </div>
     </div>
@@ -75,7 +78,8 @@
         <div class="info-container">
           <p>~3 meses</p>
           <p>macho</p>
-          <p>rajado</p>
+          <p>vermifugado</p>
+          <p>desmamado</p>
         </div>
       </div>
     </div>
@@ -95,6 +99,7 @@
           <p>~5 meses</p>
           <p>macho</p>
           <p>amarelo</p>
+          <p>vermifugado</p>
         </div>
       </div>
     </div>
@@ -108,12 +113,13 @@
       <div class="caption">
         <div class="about-container">
           <h2 class="caption-title">Luna</h2>
-          <p>fofinha</p>
+          <p>a mais fofinha e a mais medrosa</p>
         </div>
         <div class="info-container">
           <p>~5 meses</p>
           <p>fêmea</p>
           <p>rajada</p>
+          <p>vermifugada</p>
         </div>
       </div>
     </div>
@@ -133,6 +139,7 @@
           <p>~9 meses</p>
           <p>macho</p>
           <p>laranja</p>
+          <p>vermifugado</p>
         </div>
       </div>
     </div>
@@ -156,7 +163,8 @@
         <div class="info-container">
           <p>~9 meses</p>
           <p>macho</p>
-          <p>laranja</p>
+          <p>castrado</p>
+          <p>vermifugado</p>
         </div>
       </div>
     </div>
@@ -180,24 +188,10 @@
           <p>~9 meses</p>
           <p>macho</p>
           <p>laranja</p>
+          <p>vermifugado</p>
         </div>
       </div>
     </div>
   </div>
   <div class="tooltip">Use <b>← →</b> para navegar</div>
 </body>
-
-<script>
-  function transformScroll(event) {
-    console.log(event);
-    if (!event.deltaY) {
-      return;
-    }
-
-    event.currentTarget.scrollLeft += event.deltaY + event.deltaX;
-    event.preventDefault();
-  }
-
-  var element = document.getElementById('scroll');
-  // element.addEventListener('wheel', transformScroll);
-</script>
