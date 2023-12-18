@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
     <title>É LULA PORRA</title>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" href="assets/favicon.png" />
   </head>
@@ -46,7 +46,7 @@
     .background {
       position: absolute;
       inset: 0;
-      background-image: url("assets/background.png");
+      background-image: url('assets/background.png');
       background-repeat: round;
       background-size: 20vmax;
       width: 100%;
@@ -98,10 +98,10 @@
   </style>
   <script>
     // 2. This code loads the IFrame Player API code asynchronously.
-    var tag = document.createElement("script");
+    var tag = document.createElement('script');
 
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName("script")[0];
+    tag.src = 'https://www.youtube.com/iframe_api';
+    var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
     // 3. This function creates an <iframe> (and YouTube player)
@@ -109,8 +109,8 @@
     let player;
     let setup = false;
     let videoDuration = 0;
-    let progressBar = document.querySelector(".progress-bar");
-    let btn = document.querySelector(".controls button");
+    let progressBar = document.querySelector('.progress-bar');
+    let btn = document.querySelector('.controls button');
     let done = false;
     let muted = false;
 
@@ -119,36 +119,36 @@
     }
 
     function playerReady() {
-      player.setPlaybackQuality("small");
+      player.setPlaybackQuality('small');
       player.setVolume(50);
       videoDuration = player.getDuration();
-      btn.addEventListener("click", toggleMute);
+      btn.addEventListener('click', toggleMute);
       triggerPlay();
 
       if (setup) return;
 
-      window.addEventListener("mousedown", triggerPlay, { once: true });
-      window.addEventListener("keydown", triggerPlay, { once: true });
-      window.addEventListener("scroll", triggerPlay, { once: true });
-      window.addEventListener("pointerdown", triggerPlay, { once: true });
+      window.addEventListener('mousedown', triggerPlay, { once: true });
+      window.addEventListener('keydown', triggerPlay, { once: true });
+      window.addEventListener('scroll', triggerPlay, { once: true });
+      window.addEventListener('pointerdown', triggerPlay, { once: true });
     }
 
     function clearListeners(event) {
       if (event.data == YT.PlayerState.PLAYING) {
         setup = true;
-        window.removeEventListener("mousedown", triggerPlay);
-        window.removeEventListener("keydown", triggerPlay);
-        window.removeEventListener("scroll", triggerPlay);
-        window.removeEventListener("pointerdown", triggerPlay);
+        window.removeEventListener('mousedown', triggerPlay);
+        window.removeEventListener('keydown', triggerPlay);
+        window.removeEventListener('scroll', triggerPlay);
+        window.removeEventListener('pointerdown', triggerPlay);
         startProgress();
       }
     }
 
     function onYouTubeIframeAPIReady() {
-      player = new YT.Player("player", {
-        height: "0",
-        width: "0",
-        videoId: "RTMiC5WturY",
+      player = new YT.Player('player', {
+        height: '0',
+        width: '0',
+        videoId: 'RTMiC5WturY',
         playerVars: {
           disablekb: 1,
           rel: 0,
@@ -164,30 +164,30 @@
     function startProgress() {
       let interval = setInterval(() => {
         let time = player.getCurrentTime();
-        progressBar.style.setProperty("--value", (time / videoDuration) * 100);
-        done = (time + 1) >= videoDuration;
+        progressBar.style.setProperty('--value', (time / videoDuration) * 100);
+        done = time + 1 >= videoDuration;
         if (done) handleFinish(interval);
       }, 1000);
     }
 
     let icons = {
-      sound: "🔊",
-      muted: "🔈",
-      replay: "🔄",
+      sound: '🔊',
+      muted: '🔈',
+      replay: '🔄',
     };
 
     function handleFinish(interval) {
       clearInterval(interval);
       btn.innerHTML = icons.replay;
-      btn.removeEventListener("click", toggleMute);
-      btn.addEventListener("click", restartVideo);
+      btn.removeEventListener('click', toggleMute);
+      btn.addEventListener('click', restartVideo);
     }
 
     function restartVideo() {
       player.seekTo(0);
       triggerPlay();
-      btn.removeEventListener("click", restartVideo);
-      btn.addEventListener("click", toggleMute);
+      btn.removeEventListener('click', restartVideo);
+      btn.addEventListener('click', toggleMute);
       muted = false;
       btn.innerHTML = icons.sound;
       player.unMute();
@@ -204,8 +204,8 @@
       muted = !muted;
     }
 
-    let img = document.querySelector("img");
-    let bg = document.querySelector(".background");
+    let img = document.querySelector('img');
+    let bg = document.querySelector('.background');
     let anchor = img.getBoundingClientRect();
     anchor = {
       x: anchor.left + anchor.width / 2,
@@ -217,13 +217,8 @@
       const y = e.clientY;
       const angle = (Math.atan2(anchor.y - y, anchor.x - x) * 180) / Math.PI;
       img.style.filter = `hue-rotate(${angle}deg)`;
-      bg.style.setProperty(
-        "transform",
-        `translate(${(anchor.x - x) / 30}px, ${
-          (anchor.y - y) / 30
-        }px) translateZ(9rem)`
-      );
+      bg.style.setProperty('transform', `translate(${(anchor.x - x) / 30}px, ${(anchor.y - y) / 30}px) translateZ(9rem)`);
     }
-    document.addEventListener("pointermove", handleMouse);
+    document.addEventListener('pointermove', handleMouse);
   </script>
 </html>
