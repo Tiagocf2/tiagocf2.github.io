@@ -328,6 +328,10 @@ img.picture.horizontal {
   margin-top: 0;
 }
 
+.small {
+  font-size: 1rem;
+}
+
 @media (max-width: 850px) {
   .media-container {
     padding-inline: 1rem;
