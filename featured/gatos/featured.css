@@ -15,8 +15,6 @@ h1 {
 
 .tooltip,
 header.header {
-  font-family: 'Franklin Gothic Medium', cursive;
-  letter-spacing: 0.125rem;
   color: #eee;
   background-color: #222;
 }
@@ -32,6 +30,28 @@ header.header {
   box-sizing: border-box;
 
   border-bottom: 10px solid #eee;
+  letter-spacing: 0.125rem;
+}
+
+header .seo-img {
+  visibility: hidden;
+  width: 0;
+  height: 0;
+  padding: none;
+  margin: none;
+}
+
+.title {
+  font-family: 'Franklin Gothic Medium', cursive;
+}
+
+.tooltip,
+.call-to-action {
+  font-family: Consolas, Arial sans-serif;
+  letter-spacing: 0px;
+  text-align: center;
+  font-size: 1.125rem;
+  font-weight: 500;
 }
 
 .tooltip {
@@ -44,7 +64,6 @@ header.header {
   border-radius: 0 0 10px 10px;
   border: 10px solid #eee;
   border-bottom: 0;
-  text-align: center;
 }
 
 .call-to-action {
