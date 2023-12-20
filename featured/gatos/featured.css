@@ -339,6 +339,7 @@ img.picture.horizontal {
     grid-auto-columns: 100%;
   }
 }
+
 @media (max-width: 576px) {
   header.header .title h1 {
     font-size: 1.5rem;
