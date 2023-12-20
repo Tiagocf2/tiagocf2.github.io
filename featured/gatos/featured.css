@@ -154,7 +154,7 @@ header.header {
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
 
-  padding-inline: 10rem;
+  padding: 1rem 10rem;
   box-sizing: border-box;
 }
 
@@ -206,7 +206,7 @@ img.picture.horizontal {
   font-size: 1.25rem;
   line-height: 1.125em;
   display: grid;
-  grid-template-columns: 5fr 2fr;
+  grid-template-columns: 60% 1fr;
   width: 100%;
   gap: 1rem;
 }
@@ -221,6 +221,9 @@ img.picture.horizontal {
   text-align: right;
   padding-top: 0.5rem;
   padding-right: 0.5rem;
+  word-wrap: break-word;
+  /* word-break: break-word; */
+  hyphens: auto;
 }
 
 .info-container > *:not(:last-child) {
@@ -232,4 +235,29 @@ img.picture.horizontal {
   font-weight: bold;
   margin-bottom: 1rem;
   margin-top: 0;
+}
+
+@media (max-width: 576px) {
+  header.header .title h1 {
+    font-size: 1.5rem;
+  }
+
+  .media-container {
+    padding-inline: 1rem;
+    gap: 10rem;
+    grid-auto-columns: 90%;
+  }
+
+  .polaroid {
+    width: 100%;
+  }
+
+  .picture-frame {
+    width: 100%;
+  }
+
+  .caption {
+    font-size: 1rem;
+    grid-template-columns: 65% 1fr;
+  }
 }
