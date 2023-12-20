@@ -39,6 +39,7 @@ header .seo-img {
   height: 0;
   padding: none;
   margin: none;
+  display: none;
 }
 
 .title {
@@ -278,5 +279,10 @@ img.picture.horizontal {
   .caption {
     font-size: 1rem;
     grid-template-columns: 65% 1fr;
+  }
+
+  .tooltip {
+    display: none;
+    visibility: hidden;
   }
 }
